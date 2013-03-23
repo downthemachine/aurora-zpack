@@ -17,7 +17,7 @@ system ("find . | cpio -o -H newc | gzip > $dir/ramdisk-repack.gz");
 chdir $dir or die "$ARGV[0] $!";;
 
 # Parameters for Samsung Prevail
-system ("$dir/mkbootimg --cmdline 'console=ttyMSM1,115200' --kernel zImage --ramdisk ramdisk-repack.gz -o boot.img --base 0x00200000 --pagesize 4096");
+system ("$dir/mkbootimg --cmdline 'BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 loglevel=7 kgsl.mmutype=gpummu' --kernel zImage --ramdisk ramdisk-repack.gz -o boot.img --base 0x00200000 --pagesize 4096");
 print "\nrepacked boot image written at boot.img\n";
 unlink("ramdisk-repack.gz") or die $!;
 system ("rm $dir/zcwmkrnl.zip");
